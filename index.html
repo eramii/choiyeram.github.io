@@ -1,1 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이력서 - 홍길동</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #1a1a1a;
+      --color-text-secondary: #666666;
+      --color-text-muted: #999999;
+      --color-accent: #0066cc;
+      --color-border: #e5e5e5;
+      --color-tag-bg: #f5f5f5;
+      --font-sans: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* ========== Header / Intro ========== */
+    .intro {
+      margin-bottom: 80px;
+    }
+
+    .intro__greeting {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .intro__name {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .intro__description {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ========== Section ========== */
+    .section {
+      margin-bottom: 72px;
+    }
+
+    .section__title {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-text-muted);
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    /* ========== Project / Experience Item ========== */
+    .item {
+      margin-bottom: 48px;
+    }
+
+    .item:last-child {
+      margin-bottom: 0;
+    }
+
+    .item__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .item__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .item__title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .item__title a:hover {
+      color: var(--color-accent);
+    }
+
+    .item__period {
+      font-size: 14px;
+      font-family: var(--font-mono);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    .item__subtitle {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .item__label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+
+    .item__description {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .item__list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .item__list li {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .item__list li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--color-text-muted);
+    }
+
+    /* ========== Tech Stack Tags ========== */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tech-stack__tag {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      background-color: var(--color-tag-bg);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* ========== AI Tools Section ========== */
+    .ai-tool {
+      margin-bottom: 24px;
+    }
+
+    .ai-tool:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-tool__name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+
+    .ai-tool__description {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ========== Skills ========== */
+    .skills-group {
+      margin-bottom: 24px;
+    }
+
+    .skills-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills-group__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+
+    .skills-group__content {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ========== Contact ========== */
+    .contact-list {
+      list-style: none;
+    }
+
+    .contact-list li {
+      margin-bottom: 8px;
+    }
+
+    .contact-list a {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-list a:hover {
+      color: var(--color-accent);
+    }
+
+    .contact-list__label {
+      font-weight: 500;
+      color: var(--color-text);
+      margin-right: 8px;
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .container {
+        padding: 48px 20px;
+      }
+
+      .intro {
+        margin-bottom: 56px;
+      }
+
+      .intro__name {
+        font-size: 26px;
+      }
+
+      .section {
+        margin-bottom: 56px;
+      }
+
+      .item__header {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .item__title {
+        font-size: 17px;
+      }
+    }
+
+    /* ========== Print ========== */
+    @media print {
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- ==================== INTRO ==================== -->
+    <header class="intro">
+      <p class="intro__greeting">반갑습니다,</p>
+      <h1 class="intro__name">저는 홍길동입니다.</h1>
+      <p class="intro__description">
+        제주대학교에서 인공지능을 전공하고 있는 4학년 학생입니다. 
+        컴퓨터 비전과 자연어 처리에 관심이 많으며, AI 기술을 활용해 실제 문제를 해결하는 것을 좋아합니다.
+        새로운 기술을 배우고 적용하는 것에 즐거움을 느끼며, AI 도구를 적극 활용해 생산성을 높이는 개발자가 되고자 합니다.
+      </p>
+    </header>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section class="section">
+      <h2 class="section__title">Projects</h2>
+
+      <!-- Project 1 -->
+      <article class="item">
+        <div class="item__header">
+          <h3 class="item__title">
+            <a href="https://github.com/username/project" target="_blank">프로젝트명</a>
+          </h3>
+          <span class="item__period">2024. 03 - 2024. 06</span>
+        </div>
+        <p class="item__subtitle">역할 (예: AI 모델 개발, 프론트엔드 담당)</p>
+        
+        <p class="item__label">Description</p>
+        <p class="item__description">
+          프로젝트에 대한 간단한 설명을 작성합니다. 
+          무엇을 만들었는지, 왜 만들었는지, 어떤 문제를 해결했는지 등을 기술합니다.
+        </p>
+
+        <p class="item__label">What did I do</p>
+        <ul class="item__list">
+          <li>본인이 담당한 구체적인 역할 1</li>
+          <li>본인이 담당한 구체적인 역할 2</li>
+          <li>AI 도구 활용 경험 (예: Claude를 활용한 코드 리팩토링)</li>
+        </ul>
+
+        <p class="item__label">Tech Stack</p>
+        <div class="tech-stack">
+          <span class="tech-stack__tag">Python</span>
+          <span class="tech-stack__tag">PyTorch</span>
+          <span class="tech-stack__tag">React</span>
+          <span class="tech-stack__tag">FastAPI</span>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="item">
+        <div class="item__header">
+          <h3 class="item__title">
+            <a href="https://github.com/username/project2" target="_blank">두 번째 프로젝트</a>
+          </h3>
+          <span class="item__period">2023. 09 - 2023. 12</span>
+        </div>
+        <p class="item__subtitle">팀 프로젝트 / 4인</p>
+        
+        <p class="item__label">Description</p>
+        <p class="item__description">
+          프로젝트 설명을 작성합니다.
+        </p>
+
+        <p class="item__label">What did I do</p>
+        <ul class="item__list">
+          <li>역할 1</li>
+          <li>역할 2</li>
+        </ul>
+
+        <p class="item__label">Tech Stack</p>
+        <div class="tech-stack">
+          <span class="tech-stack__tag">Python</span>
+          <span class="tech-stack__tag">TensorFlow</span>
+        </div>
+      </article>
+
+      <!-- 필요한 만큼 프로젝트 추가 -->
+
+    </section>
+
+    <!-- ==================== AI TOOLS EXPERIENCE ==================== -->
+    <section class="section">
+      <h2 class="section__title">AI Tools Experience</h2>
+
+      <div class="ai-tool">
+        <h3 class="ai-tool__name">Claude</h3>
+        <p class="ai-tool__description">
+          어떤 상황에서 어떻게 활용했는지 구체적으로 작성합니다.
+          예: 복잡한 알고리즘 로직 설계 시 의사코드 작성 및 검토, 코드 리팩토링 제안 등
+        </p>
+      </div>
+
+      <div class="ai-tool">
+        <h3 class="ai-tool__name">Cursor</h3>
+        <p class="ai-tool__description">
+          개발 생산성이 어떻게 향상되었는지 작성합니다.
+          예: AI 자동완성을 활용한 보일러플레이트 코드 작성, 디버깅 시간 단축 등
+        </p>
+      </div>
+
+      <div class="ai-tool">
+        <h3 class="ai-tool__name">ChatGPT</h3>
+        <p class="ai-tool__description">
+          구체적인 활용 사례를 작성합니다.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ==================== OTHER EXPERIENCES ==================== -->
+    <section class="section">
+      <h2 class="section__title">Other Experiences</h2>
+
+      <!-- Experience 1 -->
+      <article class="item">
+        <div class="item__header">
+          <h3 class="item__title">대외활동/인턴/연구 경험명</h3>
+          <span class="item__period">2024. 07 - 2024. 08</span>
+        </div>
+        <p class="item__subtitle">역할 또는 소속</p>
+        <p class="item__description">
+          활동에 대한 설명을 작성합니다.
+        </p>
+      </article>
+
+      <!-- Experience 2: Award -->
+      <article class="item">
+        <div class="item__header">
+          <h3 class="item__title">수상 경력</h3>
+          <span class="item__period">2023. 11</span>
+        </div>
+        <p class="item__subtitle">수상 기관</p>
+        <p class="item__description">
+          수상 내용에 대한 간단한 설명을 작성합니다.
+        </p>
+      </article>
+
+      <!-- Education -->
+      <article class="item">
+        <div class="item__header">
+          <h3 class="item__title">OO대학교</h3>
+          <span class="item__period">2022. 03 - 2026. 02 (졸업예정)</span>
+        </div>
+        <p class="item__subtitle">인공지능학과</p>
+        <p class="item__description">
+          관련 수업이나 성과가 있다면 작성합니다.
+        </p>
+      </article>
+
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section class="section">
+      <h2 class="section__title">Skills</h2>
+
+      <div class="skills-group">
+        <h3 class="skills-group__title">Languages</h3>
+        <p class="skills-group__content">
+          Python, Java, JavaScript, SQL
+        </p>
+      </div>
+
+      <div class="skills-group">
+        <h3 class="skills-group__title">AI / ML</h3>
+        <p class="skills-group__content">
+          PyTorch, TensorFlow, Hugging Face Transformers, OpenCV, Scikit-learn
+        </p>
+      </div>
+
+      <div class="skills-group">
+        <h3 class="skills-group__title">Web</h3>
+        <p class="skills-group__content">
+          React, FastAPI, Flask
+        </p>
+      </div>
+
+      <div class="skills-group">
+        <h3 class="skills-group__title">Tools</h3>
+        <p class="skills-group__content">
+          Git, Docker, Linux, VS Code, Cursor
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="section">
+      <h2 class="section__title">Contact</h2>
+      
+      <ul class="contact-list">
+        <li>
+          <span class="contact-list__label">Email</span>
+          <a href="mailto:your.email@example.com">your.email@example.com</a>
+        </li>
+        <li>
+          <span class="contact-list__label">GitHub</span>
+          <a href="https://github.com/username" target="_blank">github.com/username</a>
+        </li>
+        <li>
+          <span class="contact-list__label">Blog</span>
+          <a href="https://your-blog.com" target="_blank">your-blog.com</a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>
