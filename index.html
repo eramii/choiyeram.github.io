@@ -346,6 +346,35 @@
       justify-content: center;
     }
 
+    /* ========== Figures ========== */
+    .figures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 18px 0 4px;
+    }
+
+    .figures--single { grid-template-columns: 1fr; }
+
+    .figure { margin: 0; }
+
+    .figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .figure figcaption {
+      font-size: 12.5px;
+      color: var(--text-3);
+      margin-top: 6px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
     .tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 
     .tech span {
@@ -469,6 +498,7 @@
       .pub { grid-template-columns: 1fr; gap: 2px; }
       .award { grid-template-columns: 1fr; gap: 2px; }
       .skills { grid-template-columns: 1fr; }
+      .figures { grid-template-columns: 1fr; }
       .project { padding: 24px 20px; }
       .nav__links { gap: 14px; }
     }
@@ -616,6 +646,17 @@
           </p>
         </div>
 
+        <div class="figures">
+          <figure class="figure">
+            <img src="assets/img/scmc-framework.png" alt="SCMC 프레임워크 구조: Tool Retrieval 후 메타인지 점수에 따라 SKIP/LIGHT/FULL 3단계 선택적 수정" loading="lazy">
+            <figcaption>SCMC 프레임워크 — 메타인지 점수 기반 SKIP / LIGHT / FULL 선택적 수정</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="assets/img/scmc-results-table.png" alt="도구 선택 성능 비교표: Baseline 0.5668 대비 SCMC 0.6060, 평균 호출 2.53회" loading="lazy">
+            <figcaption>도구 선택 성능 비교 — Ours(SCMC) Final Acc 0.6060, Avg calls 2.53</figcaption>
+          </figure>
+        </div>
+
         <div class="tech">
           <span>Qwen2.5-3B-Instruct</span><span>FAISS</span><span>Sentence-BERT</span>
           <span>Best-of-N Sampling</span><span>Query Rewriting</span><span>Meta-Cognition Score</span><span>MCP</span>
@@ -663,6 +704,17 @@
           </p>
         </div>
 
+        <div class="figures">
+          <figure class="figure">
+            <img src="assets/img/detection-arch.png" alt="모델 아키텍처 비교: Swin 백본(A, B)에서 EfficientNet MBConv 백본과 EMA 결합 구조(C, D)로 개선" loading="lazy">
+            <figcaption>아키텍처 비교 — Swin 백본(A·B) → EfficientNet + EMA 경량 구조(C·D)</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="assets/img/detection-cctv-results.jpg" alt="안개 낀 실제 CCTV 영상에서의 탐지 결과: 원본(왼쪽)과 차량·버스 탐지 결과(오른쪽)" loading="lazy">
+            <figcaption>안개 환경 실제 CCTV 탐지 결과 — 원본(좌) vs 제안 모델 탐지(우)</figcaption>
+          </figure>
+        </div>
+
         <div class="tech">
           <span>YOLOv8/v11</span><span>EfficientNet-B2</span><span>EMA Attention</span>
           <span>Swin Transformer</span><span>PyTorch</span><span>실환경 CCTV 데이터</span>
@@ -706,6 +758,17 @@
             자연어 지시로 다중 객체를 분할하는 구조는 라벨 없는 신규 대상에도 언어로 대응하는
             차세대 Vision 검사로 이어지는 접근입니다.
           </p>
+        </div>
+
+        <div class="figures">
+          <figure class="figure">
+            <img src="assets/img/multillmseg-arch.png" alt="Multi-LLMSeg 아키텍처: SAM ViT 비전 인코더와 LLaVA 언어모델, seg/sep 특수 토큰, SAM-style 병렬 세그멘테이션 디코더" loading="lazy">
+            <figcaption>Multi-LLMSeg 아키텍처 — &lt;seg&gt;·&lt;sep&gt; 토큰 기반 병렬 디코딩</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="assets/img/multillmseg-results.jpg" alt="세그멘테이션 결과: 기존 모델은 단일 객체만 분할, 확장 모델은 자연어 지시로 다중 객체 동시 분할" loading="lazy">
+            <figcaption>분할 결과 — 기존(단일 객체) vs 확장 모델(자연어 지시 다중 객체 동시 분할)</figcaption>
+          </figure>
         </div>
 
         <div class="tech">
