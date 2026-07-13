@@ -3,501 +3,905 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이력서 - 홍길동</title>
+  <title>최예람 | AI Engineer Portfolio</title>
+  <meta name="description" content="최예람 — 제주대학교 인공지능전공. LLM 에이전트, Vision AI, 데이터 파이프라인. 문제의 원인을 데이터 수준에서 진단하여 현장에서 신뢰할 수 있는 AI를 만듭니다.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg: #ffffff;
-      --color-text: #1a1a1a;
-      --color-text-secondary: #666666;
-      --color-text-muted: #999999;
-      --color-accent: #0066cc;
-      --color-border: #e5e5e5;
-      --color-tag-bg: #f5f5f5;
+      --bg: #fbfbfa;
+      --surface: #ffffff;
+      --text: #1c1c1e;
+      --text-2: #55555c;
+      --text-3: #8e8e96;
+      --accent: #0f62fe;
+      --accent-soft: #eef3ff;
+      --border: #e7e7e4;
+      --tag-bg: #f3f3f0;
+      --good: #0e8345;
+      --good-soft: #e8f5ee;
       --font-sans: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #131316;
+        --surface: #1c1c21;
+        --text: #f0f0f2;
+        --text-2: #b3b3bc;
+        --text-3: #7c7c86;
+        --accent: #6ea0ff;
+        --accent-soft: #1c2740;
+        --border: #2c2c33;
+        --tag-bg: #26262d;
+        --good: #4cc38a;
+        --good-soft: #16281f;
+      }
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
     body {
       font-family: var(--font-sans);
       font-size: 16px;
-      line-height: 1.7;
-      color: var(--color-text);
-      background-color: var(--color-bg);
+      line-height: 1.75;
+      color: var(--text);
+      background-color: var(--bg);
       -webkit-font-smoothing: antialiased;
     }
 
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
     .container {
-      max-width: 720px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: 0 24px;
     }
 
-    /* ========== Header / Intro ========== */
-    .intro {
-      margin-bottom: 80px;
+    /* ========== Nav ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .intro__greeting {
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      margin-bottom: 4px;
+    .nav__inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    .intro__name {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-
-    .intro__description {
+    .nav__logo {
+      font-weight: 800;
       font-size: 16px;
-      color: var(--color-text-secondary);
-      line-height: 1.8;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .nav__logo:hover { text-decoration: none; }
+
+    .nav__links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    /* ========== Section ========== */
-    .section {
-      margin-bottom: 72px;
-    }
-
-    .section__title {
+    .nav__links a {
       font-size: 14px;
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--color-text-muted);
-      margin-bottom: 32px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--color-border);
+      color: var(--text-2);
+    }
+    .nav__links a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ========== Hero ========== */
+    .hero { padding: 88px 0 64px; }
+
+    .hero__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
     }
 
-    /* ========== Project / Experience Item ========== */
-    .item {
-      margin-bottom: 48px;
+    .hero__name {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
     }
 
-    .item:last-child {
-      margin-bottom: 0;
+    .hero__name em {
+      font-style: normal;
+      color: var(--accent);
     }
 
-    .item__header {
+    .hero__tagline {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      font-size: 14px;
+      color: var(--text-3);
+    }
+
+    .hero__meta a { color: var(--text-2); font-weight: 500; }
+
+    /* ========== Section ========== */
+    .section { padding: 56px 0; border-top: 1px solid var(--border); }
+
+    .section__title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .section__title .hash {
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      margin-right: 6px;
+    }
+
+    .section__lead {
+      font-size: 15px;
+      color: var(--text-3);
+      margin-bottom: 36px;
+    }
+
+    /* ========== Strength cards ========== */
+    .strengths {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .strength {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+
+    .strength__num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .strength__title {
+      font-size: 15.5px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .strength__desc {
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ========== Timeline items (education / experience) ========== */
+    .titem {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .titem:last-child { border-bottom: none; }
+
+    .titem__period {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-3);
+      padding-top: 3px;
+    }
+
+    .titem__title { font-size: 16.5px; font-weight: 700; }
+
+    .titem__sub {
+      font-size: 14px;
+      color: var(--text-2);
+      margin-bottom: 8px;
+    }
+
+    .titem__list { list-style: none; margin-top: 6px; }
+
+    .titem__list li {
+      font-size: 14.5px;
+      color: var(--text-2);
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .titem__list li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--text-3);
+    }
+
+    /* ========== Project cards ========== */
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px 30px 26px;
+      margin-bottom: 28px;
+    }
+    .project:last-child { margin-bottom: 0; }
+
+    .project__top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 8px 16px;
+      margin-bottom: 4px;
     }
 
-    .item__title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--color-text);
+    .project__title {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      line-height: 1.4;
     }
 
-    .item__title a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .item__title a:hover {
-      color: var(--color-accent);
-    }
-
-    .item__period {
-      font-size: 14px;
+    .project__period {
       font-family: var(--font-mono);
-      color: var(--color-text-muted);
-      white-space: nowrap;
-    }
-
-    .item__subtitle {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      margin-bottom: 16px;
-    }
-
-    .item__label {
       font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text-muted);
-      margin-bottom: 8px;
-      margin-top: 16px;
+      color: var(--text-3);
+      white-space: nowrap;
+      padding-top: 5px;
     }
 
-    .item__description {
-      font-size: 15px;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
+    .project__role {
+      font-size: 13.5px;
+      color: var(--text-3);
+      margin-bottom: 14px;
     }
 
-    .item__list {
-      list-style: none;
-      padding: 0;
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+
+    .badge {
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--accent-soft);
+      color: var(--accent);
     }
 
-    .item__list li {
-      font-size: 15px;
-      color: var(--color-text-secondary);
-      padding-left: 16px;
-      position: relative;
+    .badge--result { background: var(--good-soft); color: var(--good); }
+
+    .project__block { margin-bottom: 16px; }
+    .project__block:last-of-type { margin-bottom: 0; }
+
+    .project__label {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-3);
       margin-bottom: 6px;
     }
 
-    .item__list li::before {
-      content: "–";
+    .project__text {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    .project__steps { list-style: none; counter-reset: step; }
+
+    .project__steps li {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.7;
+      padding-left: 30px;
+      position: relative;
+      margin-bottom: 8px;
+      counter-increment: step;
+    }
+
+    .project__steps li::before {
+      content: counter(step);
       position: absolute;
       left: 0;
-      color: var(--color-text-muted);
-    }
-
-    /* ========== Tech Stack Tags ========== */
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .tech-stack__tag {
-      font-size: 13px;
+      top: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
       font-family: var(--font-mono);
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      background-color: var(--color-tag-bg);
-      padding: 4px 10px;
-      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* ========== AI Tools Section ========== */
-    .ai-tool {
-      margin-bottom: 24px;
+    .tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+
+    .tech span {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--text-2);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 6px;
     }
 
-    .ai-tool:last-child {
-      margin-bottom: 0;
+    /* compact project rows */
+    .project--compact { padding: 24px 26px; }
+    .project--compact .project__title { font-size: 16.5px; }
+
+    /* ========== Publications ========== */
+    .pub {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pub:last-child { border-bottom: none; }
+
+    .pub__year {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      padding-top: 2px;
     }
 
-    .ai-tool__name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 8px;
+    .pub__title { font-size: 15.5px; font-weight: 700; line-height: 1.55; }
+
+    .pub__venue { font-size: 13.5px; color: var(--text-3); margin-top: 4px; }
+
+    /* ========== Awards / activities list ========== */
+    .award {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .award:last-child { border-bottom: none; }
+
+    .award__date {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-3);
+      padding-top: 2px;
     }
 
-    .ai-tool__description {
-      font-size: 15px;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-    }
+    .award__title { font-size: 15px; font-weight: 700; }
+    .award__title .org { font-weight: 500; color: var(--text-3); font-size: 13.5px; }
+    .award__desc { font-size: 14px; color: var(--text-2); margin-top: 2px; }
 
     /* ========== Skills ========== */
-    .skills-group {
-      margin-bottom: 24px;
+    .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+
+    .skills__group h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
     }
 
-    .skills-group:last-child {
-      margin-bottom: 0;
+    .skills__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .skills__tags span {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--text-2);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 6px;
     }
 
-    .skills-group__title {
-      font-size: 15px;
+    /* ========== Contact / footer ========== */
+    .contact__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .contact__links a {
+      display: inline-block;
+      font-size: 14.5px;
       font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      transition: border-color .15s, color .15s;
     }
 
-    .skills-group__content {
-      font-size: 15px;
-      color: var(--color-text-secondary);
-      line-height: 1.8;
-    }
-
-    /* ========== Contact ========== */
-    .contact-list {
-      list-style: none;
-    }
-
-    .contact-list li {
-      margin-bottom: 8px;
-    }
-
-    .contact-list a {
-      font-size: 15px;
-      color: var(--color-text-secondary);
+    .contact__links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
       text-decoration: none;
-      transition: color 0.2s;
     }
 
-    .contact-list a:hover {
-      color: var(--color-accent);
-    }
-
-    .contact-list__label {
-      font-weight: 500;
-      color: var(--color-text);
-      margin-right: 8px;
+    footer {
+      padding: 40px 0 56px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-3);
+      text-align: center;
     }
 
     /* ========== Responsive ========== */
-    @media (max-width: 600px) {
-      .container {
-        padding: 48px 20px;
-      }
-
-      .intro {
-        margin-bottom: 56px;
-      }
-
-      .intro__name {
-        font-size: 26px;
-      }
-
-      .section {
-        margin-bottom: 56px;
-      }
-
-      .item__header {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .item__title {
-        font-size: 17px;
-      }
+    @media (max-width: 720px) {
+      .hero { padding: 56px 0 48px; }
+      .hero__name { font-size: 30px; }
+      .strengths { grid-template-columns: 1fr; }
+      .titem { grid-template-columns: 1fr; gap: 4px; }
+      .pub { grid-template-columns: 1fr; gap: 2px; }
+      .award { grid-template-columns: 1fr; gap: 2px; }
+      .skills { grid-template-columns: 1fr; }
+      .project { padding: 24px 20px; }
+      .nav__links { gap: 14px; }
     }
 
-    /* ========== Print ========== */
     @media print {
-      .container {
-        max-width: 100%;
-        padding: 0;
-      }
-
-      .section {
-        page-break-inside: avoid;
-      }
+      .nav { display: none; }
+      .project { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    
-    <!-- ==================== INTRO ==================== -->
-    <header class="intro">
-      <p class="intro__greeting">반갑습니다,</p>
-      <h1 class="intro__name">저는 홍길동입니다.</h1>
-      <p class="intro__description">
-        제주대학교에서 인공지능을 전공하고 있는 4학년 학생입니다. 
-        컴퓨터 비전과 자연어 처리에 관심이 많으며, AI 기술을 활용해 실제 문제를 해결하는 것을 좋아합니다.
-        새로운 기술을 배우고 적용하는 것에 즐거움을 느끼며, AI 도구를 적극 활용해 생산성을 높이는 개발자가 되고자 합니다.
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#top">최예람</a>
+      <div class="nav__links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#awards">Awards</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="top">
+
+    <!-- ==================== HERO ==================== -->
+    <header class="hero" id="about">
+      <p class="hero__eyebrow">AI Engineer · LLM Agent &amp; Vision AI</p>
+      <h1 class="hero__name">문제의 원인을 <em>데이터 수준에서 진단</em>하여<br>현장에서 신뢰할 수 있는 AI를 만듭니다.</h1>
+      <p class="hero__tagline">
+        학칙 문서를 자연어로 탐색하는 RAG, 자연어 지시를 이미지 속 여러 객체에 정렬하는 Multi-LLMSeg,
+        에이전트의 도구 선택 실패 원인을 역추적해 수정하는 SCMC 프레임워크까지 —
+        자연어 요청을 상황과 목적에 맞는 정보와 행동으로 연결하는 문제를 꾸준히 다뤄왔습니다.
       </p>
+      <div class="hero__meta">
+        <span>제주대학교 인공지능전공 · 2026.08 졸업예정</span>
+        <a href="mailto:yeramiya@naver.com">yeramiya@naver.com</a>
+        <a href="https://github.com/eramii" target="_blank" rel="noopener">github.com/eramii</a>
+      </div>
+
+      <div class="strengths">
+        <div class="strength">
+          <p class="strength__num">01</p>
+          <h3 class="strength__title">데이터부터 바라보는 원인 진단</h3>
+          <p class="strength__desc">
+            RL 에이전트의 실패 원인을 알고리즘이 아닌 프레임 밖 데이터 분포에서 진단하고,
+            선택적 자기수정 구조로 전환해 해결했습니다. (SCMC · KCC 포스터 발표)
+          </p>
+        </div>
+        <div class="strength">
+          <p class="strength__num">02</p>
+          <h3 class="strength__title">Vision AI 개발 경험</h3>
+          <p class="strength__desc">
+            악천후 환경의 경량 객체탐지(학회지 게재)와
+            멀티모달 LMM 기반 복수 객체 세그멘테이션을 직접 설계·구현했습니다.
+          </p>
+        </div>
+        <div class="strength">
+          <p class="strength__num">03</p>
+          <h3 class="strength__title">데이터 품질 · 파이프라인</h3>
+          <p class="strength__desc">
+            수집–정제–라벨링–검증 전 과정을 직접 설계·운영했습니다.
+            검증된 모델을 그대로 쓰지 않고 데이터 특성에 맞게 조정해 적용합니다.
+          </p>
+        </div>
+      </div>
     </header>
 
+    <!-- ==================== EXPERIENCE / EDUCATION ==================== -->
+    <section class="section" id="experience">
+      <h2 class="section__title"><span class="hash">#</span>Experience &amp; Education</h2>
+      <p class="section__lead">연구 인턴 경력과 학력</p>
+
+      <article class="titem">
+        <div class="titem__period">2026.01 – 2026.02</div>
+        <div>
+          <h3 class="titem__title">한국전자통신연구원(ETRI) 제주AX융합연구실</h3>
+          <p class="titem__sub">연구 인턴</p>
+          <ul class="titem__list">
+            <li>MCP 기반으로 제주 관광 에이전트에 C-ITS / ITS / 실시간 날씨 등 다수 실시간 API 연동</li>
+            <li>관광 QA 데이터셋 구축 및 2,500건 EEAT 기준 평가, Qwen2.5 파인튜닝용 데이터 구성</li>
+            <li>유사 질문에서의 도구 혼동 문제를 발견하고, 메타인지 기반 선택적 자기수정(SCMC) 프레임워크 제안</li>
+            <li>연구 결과를 2026 한국컴퓨터종합학술대회(KCC 2026)에 제1저자로 투고</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="titem">
+        <div class="titem__period">2022.03 – 2026.08</div>
+        <div>
+          <h3 class="titem__title">제주대학교 소프트웨어학부 인공지능전공</h3>
+          <p class="titem__sub">학사 · GPA 4.01 / 4.5 (졸업예정)</p>
+          <ul class="titem__list">
+            <li>설명가능한 인공지능 연구실 학부연구생 (2023.07 – 2024.07)</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
     <!-- ==================== PROJECTS ==================== -->
-    <section class="section">
-      <h2 class="section__title">Projects</h2>
+    <section class="section" id="projects">
+      <h2 class="section__title"><span class="hash">#</span>Projects</h2>
+      <p class="section__lead">문제 발견 → 원인 진단 → 해결까지의 과정을 담았습니다.</p>
 
-      <!-- Project 1 -->
-      <article class="item">
-        <div class="item__header">
-          <h3 class="item__title">
-            <a href="https://github.com/username/project" target="_blank">프로젝트명</a>
-          </h3>
-          <span class="item__period">2024. 03 - 2024. 06</span>
+      <!-- Project 1: SCMC -->
+      <article class="project">
+        <div class="project__top">
+          <h3 class="project__title">SCMC — 메타인지 기반 선택적 자기수정 프레임워크</h3>
+          <span class="project__period">2026.01 – 2026.03</span>
         </div>
-        <p class="item__subtitle">역할 (예: AI 모델 개발, 프론트엔드 담당)</p>
-        
-        <p class="item__label">Description</p>
-        <p class="item__description">
-          프로젝트에 대한 간단한 설명을 작성합니다. 
-          무엇을 만들었는지, 왜 만들었는지, 어떤 문제를 해결했는지 등을 기술합니다.
-        </p>
-
-        <p class="item__label">What did I do</p>
-        <ul class="item__list">
-          <li>본인이 담당한 구체적인 역할 1</li>
-          <li>본인이 담당한 구체적인 역할 2</li>
-          <li>AI 도구 활용 경험 (예: Claude를 활용한 코드 리팩토링)</li>
-        </ul>
-
-        <p class="item__label">Tech Stack</p>
-        <div class="tech-stack">
-          <span class="tech-stack__tag">Python</span>
-          <span class="tech-stack__tag">PyTorch</span>
-          <span class="tech-stack__tag">React</span>
-          <span class="tech-stack__tag">FastAPI</span>
+        <p class="project__role">팀장 · 2인 연구 · 기여도 50% — 프레임워크 제안 및 실험 주도 (ETRI 제주AX융합연구실)</p>
+        <div class="badges">
+          <span class="badge">KCC 2026 포스터 발표 · 제1저자</span>
+          <span class="badge--result badge">정확도 56.68% → 60.60% (+3.92%p)</span>
+          <span class="badge--result badge">평균 호출 2.53회 (기존 5~6회)</span>
         </div>
-      </article>
 
-      <!-- Project 2 -->
-      <article class="item">
-        <div class="item__header">
-          <h3 class="item__title">
-            <a href="https://github.com/username/project2" target="_blank">두 번째 프로젝트</a>
-          </h3>
-          <span class="item__period">2023. 09 - 2023. 12</span>
+        <div class="project__block">
+          <p class="project__label">Problem</p>
+          <p class="project__text">
+            소형 언어모델(Qwen2.5-3B-Instruct)이 유사한 질문에서 맥락을 혼동해 잘못된 도구(API)를 선택하는 문제.
+            예: “주유소 제일 저렴한 곳 알려줘” → 정답은 가격 API인데 위치 API를 제시.
+            기존 자기수정 기법을 일괄 적용하면 정답까지 오답으로 고치는 overcorrection으로 오히려 성능이 하락.
+          </p>
         </div>
-        <p class="item__subtitle">팀 프로젝트 / 4인</p>
-        
-        <p class="item__label">Description</p>
-        <p class="item__description">
-          프로젝트 설명을 작성합니다.
-        </p>
 
-        <p class="item__label">What did I do</p>
-        <ul class="item__list">
-          <li>역할 1</li>
-          <li>역할 2</li>
-        </ul>
+        <div class="project__block">
+          <p class="project__label">Approach</p>
+          <ol class="project__steps">
+            <li>도구 혼동이 잦은 질문을 모아 선택 과정을 역추적 — 질문은 서술형 자연어, 도구 설명은 기능 명칭형이라 임베딩 공간에서 의미가 어긋나 retrieval 단계에서 정답이 후보군에 진입하지 못하는 구조적 불일치를 확인</li>
+            <li>쿼리–도구 코사인 유사도, 토큰 엔트로피, 검색 마진, 첫 토큰 확률을 가중 결합한 메타인지 점수 설계</li>
+            <li>신뢰도가 낮을 때만 재검색·재생성하는 SKIP / LIGHT / FULL 3단계 선택적 수정 구조로 구현</li>
+          </ol>
+        </div>
 
-        <p class="item__label">Tech Stack</p>
-        <div class="tech-stack">
-          <span class="tech-stack__tag">Python</span>
-          <span class="tech-stack__tag">TensorFlow</span>
+        <div class="project__block">
+          <p class="project__label">Result</p>
+          <p class="project__text">
+            MetaTool 벤치마크 도구 선택 정확도 56.68% → 60.60% (+3.92%p).
+            일괄 수정(Always LIGHT/FULL)은 baseline보다 하락한 반면, 선택적 수정은 평균 2.53회 호출로
+            더 적은 비용으로 더 높은 정확도를 달성. 오답 비용이 큰 현장 LLM의 신뢰성 조건을 실험으로 검증.
+          </p>
+        </div>
+
+        <div class="tech">
+          <span>Qwen2.5-3B-Instruct</span><span>FAISS</span><span>Sentence-BERT</span>
+          <span>Best-of-N Sampling</span><span>Query Rewriting</span><span>Meta-Cognition Score</span><span>MCP</span>
         </div>
       </article>
 
-      <!-- 필요한 만큼 프로젝트 추가 -->
+      <!-- Project 2: Adverse weather detection -->
+      <article class="project">
+        <div class="project__top">
+          <h3 class="project__title">악천후 환경 경량 객체탐지</h3>
+          <span class="project__period">2025.03 – 2025.12</span>
+        </div>
+        <p class="project__role">팀장 · 2인 개발 · 기여도 60% — EfficientNet 변경 프레임워크 설계 및 비교 실험 (캡스톤디자인 2)</p>
+        <div class="badges">
+          <span class="badge">적정기술학회지 게재 · 제1저자</span>
+          <span class="badge--result badge">mAP50 79.22% (+7.83%p)</span>
+          <span class="badge--result badge">추론 속도 23% 향상</span>
+          <span class="badge--result badge">실제 CCTV mAP50-95 57.9%</span>
+        </div>
 
+        <div class="project__block">
+          <p class="project__label">Problem</p>
+          <p class="project__text">
+            장마철 안개로 인한 교통사고가 빈번한 제주에서, CCTV 같은 저사양 하드웨어로도 동작하는
+            악천후 객체탐지 모델이 필요했습니다. 제약된 연산 환경에서의 탐지 문제.
+          </p>
+        </div>
+
+        <div class="project__block">
+          <p class="project__label">Approach</p>
+          <ol class="project__steps">
+            <li>참고 논문(Swin 백본)의 공개 코드 부재 → 직접 구현으로 재현, Swin 계열의 높은 연산량은 CCTV 환경에 부적합 판단</li>
+            <li>백본을 EfficientNet으로 교체하고 파라미터·추론시간·정확도를 반복 측정, YOLO Head P3·P4·P5에 EMA(Efficient Multi-scale Attention) 결합으로 흐릿한 객체 경계 보강</li>
+            <li>실제 CCTV 투입 시 정확도 하락 → 공개 데이터는 정면 화각, CCTV는 부감 화각이라는 분포 차이로 진단</li>
+            <li>장마철 안개 환경 데이터를 직접 수집·라벨링해 학습 데이터를 재구성하고 YOLO 버전 확장</li>
+          </ol>
+        </div>
+
+        <div class="project__block">
+          <p class="project__label">Result</p>
+          <p class="project__text">
+            mAP50 79.22%(기준 모델 대비 +7.83%p), Swin 백본 대비 추론 속도 23% 향상, 파라미터 4~5M의 경량 구조 유지.
+            벤치마크가 아닌 제주교통정보센터 실제 CCTV로 검증해 이질적인 현장 데이터에서의 일반화를 확인 —
+            “현장에서 되는가”에 답한 경험.
+          </p>
+        </div>
+
+        <div class="tech">
+          <span>YOLOv8/v11</span><span>EfficientNet-B2</span><span>EMA Attention</span>
+          <span>Swin Transformer</span><span>PyTorch</span><span>실환경 CCTV 데이터</span>
+        </div>
+      </article>
+
+      <!-- Project 3: Multi-LLMSeg -->
+      <article class="project">
+        <div class="project__top">
+          <h3 class="project__title">Multi-LLMSeg — 멀티모달 LMM 복수 객체 세그멘테이션</h3>
+          <span class="project__period">2025.03 – 2025.09</span>
+        </div>
+        <p class="project__role">팀원 · 3인 개발 · 기여도 50% — Slot 병렬 디코딩 구조 설계 (최신 연구·논문 트렌드 탐구 전공 프로젝트)</p>
+        <div class="badges">
+          <span class="badge--result badge">단일 객체 → 복수 객체 동시 분할로 구조 확장</span>
+          <span class="badge--result badge">gIoU 41.9% · cIoU 18.8%</span>
+        </div>
+
+        <div class="project__block">
+          <p class="project__label">Problem</p>
+          <p class="project__text">
+            LLM 기반 이미지 분할 모델 LISA는 한 번에 1개 객체만 분할 가능 —
+            “빨간 선박과 파란 자동차를 분할해줘” 같은 요청은 순차 처리만 가능하고 동시 분할이 불가능한 구조적 한계.
+          </p>
+        </div>
+
+        <div class="project__block">
+          <p class="project__label">Approach</p>
+          <ol class="project__steps">
+            <li>텍스트 입력 → LLaVA가 객체 수를 파악해 [SEP]·[SEG] 토큰으로 N개 슬롯 생성</li>
+            <li>SAM ViT 인코더의 이미지 특징 위에서 각 슬롯이 자기 객체 영역에 어텐션 집중, 슬롯 간 경쟁으로 중복 할당 방지</li>
+            <li>초기 마스크가 무작위로 할당되는 현상을 토큰 간 표현 학습 부족으로 진단 후 Slot Attention으로 안정화</li>
+            <li>SAM-style 병렬 디코더로 객체별 마스크 동시 출력, A100 ×7 분산 처리로 10 epochs 학습 (데이터셋 직접 구축)</li>
+          </ol>
+        </div>
+
+        <div class="project__block">
+          <p class="project__label">Result</p>
+          <p class="project__text">
+            단일 객체 처리에서 복수 객체 동시 분할로 구조적 확장 (gIoU 41.9%, cIoU 18.8%).
+            자연어 지시로 다중 객체를 분할하는 구조는 라벨 없는 신규 대상에도 언어로 대응하는
+            차세대 Vision 검사로 이어지는 접근입니다.
+          </p>
+        </div>
+
+        <div class="tech">
+          <span>LISA</span><span>LLaVA</span><span>SAM</span><span>Slot Attention</span>
+          <span>PyTorch</span><span>DeepSpeed</span>
+        </div>
+      </article>
+
+      <!-- Compact projects -->
+      <article class="project project--compact">
+        <div class="project__top">
+          <h3 class="project__title">양돈 축사 영상 기반 객체 인지 및 무게 예측</h3>
+          <span class="project__period">2025.10 – 2025.11</span>
+        </div>
+        <p class="project__role">ETRI 주관 교육 · 실습</p>
+        <ul class="titem__list">
+          <li>실제 축사 영상에서 다수 돼지 객체를 동시 인식하고 칼만필터 · ReID · 헝가리안 알고리즘으로 ID 추적 문제 해결</li>
+          <li>무게 예측값의 분포를 살펴 비정상 범위를 걸러내는 이상치 필터링(20~100kg)으로 예측 오차 감소</li>
+        </ul>
+        <div class="tech">
+          <span>SAM2</span><span>Kalman Filter</span><span>ReID</span><span>RFID</span>
+        </div>
+      </article>
+
+      <article class="project project--compact">
+        <div class="project__top">
+          <h3 class="project__title">LG Aimers 7기 — 시계열 수요예측</h3>
+          <span class="project__period">2025.07 – 2025.08</span>
+        </div>
+        <p class="project__role">LG AI연구원 주관 (300시간) 수료</p>
+        <ul class="titem__list">
+          <li>9개 식음 업장 · 193개 메뉴의 약 1.5년치 판매 데이터를 분석해 추세·계절성과 매출의 연관성 파악, 결측·정규화 등 전처리 수행</li>
+          <li>영업 중단 기간 · 요일별 매출 차이 · 공휴일 등 도메인 특성을 반영한 수요 패턴 모델 구성</li>
+          <li>LSTM 기반 시계열 수요예측 파이프라인을 전처리부터 예측까지 직접 설계·구현해 기준 점수 달성</li>
+        </ul>
+        <div class="tech">
+          <span>LSTM</span><span>시계열 분석</span><span>수요예측</span><span>Pandas</span>
+        </div>
+      </article>
+
+      <article class="project project--compact">
+        <div class="project__top">
+          <h3 class="project__title">제주대학교 학칙 RAG 질의응답 시스템</h3>
+        </div>
+        <p class="project__role">KR-SBERT + FAISS 기반 검색 증강 생성</p>
+        <ul class="titem__list">
+          <li>학내 규정 문서를 임베딩·인덱싱해 자연어 질의에 근거 문서와 함께 답하는 RAG 파이프라인 구현</li>
+        </ul>
+        <div class="tech">
+          <span>RAG</span><span>KR-SBERT</span><span>FAISS</span>
+        </div>
+      </article>
     </section>
 
-    <!-- ==================== AI TOOLS EXPERIENCE ==================== -->
-    <section class="section">
-      <h2 class="section__title">AI Tools Experience</h2>
+    <!-- ==================== PUBLICATIONS ==================== -->
+    <section class="section" id="publications">
+      <h2 class="section__title"><span class="hash">#</span>Publications</h2>
+      <p class="section__lead">논문 및 학회 발표</p>
 
-      <div class="ai-tool">
-        <h3 class="ai-tool__name">Claude</h3>
-        <p class="ai-tool__description">
-          어떤 상황에서 어떻게 활용했는지 구체적으로 작성합니다.
-          예: 복잡한 알고리즘 로직 설계 시 의사코드 작성 및 검토, 코드 리팩토링 제안 등
-        </p>
-      </div>
+      <article class="pub">
+        <div class="pub__year">2026</div>
+        <div>
+          <h3 class="pub__title">“메타인지 점수 기반 선택적 자기수정을 통한 소형 언어모델의 도구 선택 성능 향상”</h3>
+          <p class="pub__venue">2026 한국컴퓨터종합학술대회(KCC 2026) · 제1저자 · 포스터 발표 예정</p>
+        </div>
+      </article>
 
-      <div class="ai-tool">
-        <h3 class="ai-tool__name">Cursor</h3>
-        <p class="ai-tool__description">
-          개발 생산성이 어떻게 향상되었는지 작성합니다.
-          예: AI 자동완성을 활용한 보일러플레이트 코드 작성, 디버깅 시간 단축 등
-        </p>
-      </div>
-
-      <div class="ai-tool">
-        <h3 class="ai-tool__name">ChatGPT</h3>
-        <p class="ai-tool__description">
-          구체적인 활용 사례를 작성합니다.
-        </p>
-      </div>
-
+      <article class="pub">
+        <div class="pub__year">2025</div>
+        <div>
+          <h3 class="pub__title">“YOLO 기반 EfficientNet · EMA 어텐션을 활용한 악천후 환경 경량 객체 탐지”</h3>
+          <p class="pub__venue">적정기술학회지 · 제1저자 · 게재</p>
+        </div>
+      </article>
     </section>
 
-    <!-- ==================== OTHER EXPERIENCES ==================== -->
-    <section class="section">
-      <h2 class="section__title">Other Experiences</h2>
+    <!-- ==================== AWARDS ==================== -->
+    <section class="section" id="awards">
+      <h2 class="section__title"><span class="hash">#</span>Awards &amp; Activities</h2>
+      <p class="section__lead">수상, 자격, 대외활동</p>
 
-      <!-- Experience 1 -->
-      <article class="item">
-        <div class="item__header">
-          <h3 class="item__title">대외활동/인턴/연구 경험명</h3>
-          <span class="item__period">2024. 07 - 2024. 08</span>
+      <article class="award">
+        <div class="award__date">2024.07</div>
+        <div>
+          <h3 class="award__title">제1회 CLASS UP 2차 경진대회 최우수상 <span class="org">· 제주대학교</span></h3>
+          <p class="award__desc">MobileNetV2 기반 얼굴 연령 인식 자동 인터페이스 변환 키오스크 설계</p>
         </div>
-        <p class="item__subtitle">역할 또는 소속</p>
-        <p class="item__description">
-          활동에 대한 설명을 작성합니다.
-        </p>
       </article>
 
-      <!-- Experience 2: Award -->
-      <article class="item">
-        <div class="item__header">
-          <h3 class="item__title">수상 경력</h3>
-          <span class="item__period">2023. 11</span>
+      <article class="award">
+        <div class="award__date">2024.11</div>
+        <div>
+          <h3 class="award__title">컴퓨터공학 · 인공지능전공 작품 전시회 우수상 <span class="org">· 제주대학교</span></h3>
+          <p class="award__desc">아두이노 기반 스마트 주차장 설계 및 구현 — 50번의 시도와 로그 분석으로 주차 자리·입출차 차단기 간섭 오류 해결</p>
         </div>
-        <p class="item__subtitle">수상 기관</p>
-        <p class="item__description">
-          수상 내용에 대한 간단한 설명을 작성합니다.
-        </p>
       </article>
 
-      <!-- Education -->
-      <article class="item">
-        <div class="item__header">
-          <h3 class="item__title">OO대학교</h3>
-          <span class="item__period">2022. 03 - 2026. 02 (졸업예정)</span>
+      <article class="award">
+        <div class="award__date">2025.12</div>
+        <div>
+          <h3 class="award__title">AI 콜로퀴움 리빙랩 경진대회 장려상 <span class="org">· 제주대학교</span></h3>
+          <p class="award__desc">전력 데이터와 위성 데이터를 결합한 제주 빈집 탐지 아이디어 제안</p>
         </div>
-        <p class="item__subtitle">인공지능학과</p>
-        <p class="item__description">
-          관련 수업이나 성과가 있다면 작성합니다.
-        </p>
       </article>
 
+      <article class="award">
+        <div class="award__date">2025</div>
+        <div>
+          <h3 class="award__title">2025 월드프렌즈 IT봉사단 네팔 팀장</h3>
+          <p class="award__desc">중·고등학생 70명 대상 아두이노 기초 문법 및 실습 교육 기획·운영</p>
+        </div>
+      </article>
+
+      <article class="award">
+        <div class="award__date">2024</div>
+        <div>
+          <h3 class="award__title">2024 월드프렌즈 IT봉사단 몽골 팀원</h3>
+          <p class="award__desc">초등학생 30명 대상 블록코딩·파이썬 교육</p>
+        </div>
+      </article>
+
+      <article class="award">
+        <div class="award__date">2025.10 – 2026.01</div>
+        <div>
+          <h3 class="award__title">트라이톤</h3>
+          <p class="award__desc">낚시성 기사 신뢰도 검증 대회 수료</p>
+        </div>
+      </article>
+
+      <article class="award">
+        <div class="award__date">2024</div>
+        <div>
+          <h3 class="award__title">공과대학 학생회 체육부장</h3>
+          <p class="award__desc">공과대학 체육대회 총괄 기획 및 운영</p>
+        </div>
+      </article>
+
+      <article class="award">
+        <div class="award__date">2026.01</div>
+        <div>
+          <h3 class="award__title">TOEIC Speaking IM3</h3>
+        </div>
+      </article>
     </section>
 
     <!-- ==================== SKILLS ==================== -->
-    <section class="section">
-      <h2 class="section__title">Skills</h2>
+    <section class="section" id="skills">
+      <h2 class="section__title"><span class="hash">#</span>Skills</h2>
+      <p class="section__lead">프로젝트에서 직접 사용한 기술 스택</p>
 
-      <div class="skills-group">
-        <h3 class="skills-group__title">Languages</h3>
-        <p class="skills-group__content">
-          Python, Java, JavaScript, SQL
-        </p>
+      <div class="skills">
+        <div class="skills__group">
+          <h3>LLM · Agent</h3>
+          <div class="skills__tags">
+            <span>Qwen2.5</span><span>LLaVA</span><span>RAG</span><span>FAISS</span>
+            <span>Sentence-BERT</span><span>MCP</span><span>Self-Correction</span><span>Fine-tuning</span>
+          </div>
+        </div>
+        <div class="skills__group">
+          <h3>Vision</h3>
+          <div class="skills__tags">
+            <span>YOLOv8/v11</span><span>EfficientNet</span><span>SAM / SAM2</span>
+            <span>Swin Transformer</span><span>Slot Attention</span><span>EMA Attention</span>
+          </div>
+        </div>
+        <div class="skills__group">
+          <h3>ML · Data</h3>
+          <div class="skills__tags">
+            <span>Python</span><span>PyTorch</span><span>DeepSpeed</span><span>LSTM</span>
+            <span>시계열 분석</span><span>데이터 수집·정제·라벨링</span>
+          </div>
+        </div>
+        <div class="skills__group">
+          <h3>Etc</h3>
+          <div class="skills__tags">
+            <span>Git</span><span>Linux</span><span>분산 학습 (A100 ×7)</span><span>Kalman Filter</span>
+          </div>
+        </div>
       </div>
-
-      <div class="skills-group">
-        <h3 class="skills-group__title">AI / ML</h3>
-        <p class="skills-group__content">
-          PyTorch, TensorFlow, Hugging Face Transformers, OpenCV, Scikit-learn
-        </p>
-      </div>
-
-      <div class="skills-group">
-        <h3 class="skills-group__title">Web</h3>
-        <p class="skills-group__content">
-          React, FastAPI, Flask
-        </p>
-      </div>
-
-      <div class="skills-group">
-        <h3 class="skills-group__title">Tools</h3>
-        <p class="skills-group__content">
-          Git, Docker, Linux, VS Code, Cursor
-        </p>
-      </div>
-
     </section>
 
     <!-- ==================== CONTACT ==================== -->
-    <section class="section">
-      <h2 class="section__title">Contact</h2>
-      
-      <ul class="contact-list">
-        <li>
-          <span class="contact-list__label">Email</span>
-          <a href="mailto:your.email@example.com">your.email@example.com</a>
-        </li>
-        <li>
-          <span class="contact-list__label">GitHub</span>
-          <a href="https://github.com/username" target="_blank">github.com/username</a>
-        </li>
-        <li>
-          <span class="contact-list__label">Blog</span>
-          <a href="https://your-blog.com" target="_blank">your-blog.com</a>
-        </li>
-      </ul>
+    <section class="section" id="contact">
+      <h2 class="section__title"><span class="hash">#</span>Contact</h2>
+      <p class="section__lead">함께 문제를 풀고 싶다면 연락 주세요.</p>
+      <div class="contact__links">
+        <a href="mailto:yeramiya@naver.com">✉️ yeramiya@naver.com</a>
+        <a href="https://github.com/eramii" target="_blank" rel="noopener">GitHub — eramii</a>
+      </div>
     </section>
 
   </div>
+
+  <footer>
+    © 2026 최예람 (Choi Yeram) · Jeju National University, AI Major
+  </footer>
+
 </body>
 </html>
